@@ -8,8 +8,6 @@ router.get('/all', async (req, res) => {
     let { page, size } = req.query;
     page = parseInt(page) || 1;
     size = parseInt(size) || 10;
-    const offset = (page - 1) * size;
-
     const [products] = await db.query(`
         SELECT Product.id, Product.name AS ProductName, Category.name AS CategoryName, Product.categoryId 
         FROM Product 
@@ -20,11 +18,10 @@ router.get('/all', async (req, res) => {
 });
 
 
-
 // Create product
-router.post('/:name', async (req, res) => {
+router.post('/:id', async (req, res) => {
     const { name, categoryId } = req.body;
-    await db.query("INSERT INTO Product (name, categoryId) VALUES (?, ?)", [name, categoryId]);
+    await db.query("INSERT INTO Product (id, name, categoryId) VALUES (?,?, ?)", [id, name, categoryId]);
     res.json({ message: "Product added" });
 });
 
