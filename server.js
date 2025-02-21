@@ -16,8 +16,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 
-app.use('/api/categories', require('./routes/category'));
-app.use('/api/products', require('./routes/product'));
+app.use('/api/categories', require('./routes/category.routes'));
+app.use('/api/products', require('./routes/product.routes'));
 
 
 
