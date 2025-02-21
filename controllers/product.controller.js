@@ -14,6 +14,21 @@ class ProductController {
         }
     }
 
+    static async getProductById(req, res) {
+        try {
+            const { id } = req.params;
+            const [product] = await ProductService.getProductById(id);
+
+            if (product.length === 0) {
+                return res.status(404).json({ message: "Product not found" });
+            }
+
+            res.json(product[0]);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
+
     static async createProduct(req, res) {
         try {
             const { name, categoryId } = req.body;

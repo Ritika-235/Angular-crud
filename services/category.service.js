@@ -5,6 +5,10 @@ class CategoryService {
         return db.query("SELECT * FROM Category");
     }
 
+    static async getCategoryById(id) {
+        return db.query("SELECT * FROM Category WHERE id = ?", [id]);
+    }
+
     static async createCategory(name) {
         return db.query("INSERT INTO Category (name) VALUES (?)", [name]);
     }

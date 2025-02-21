@@ -10,6 +10,21 @@ class CategoryController {
         }
     }
 
+    static async getCategoryById(req, res) {
+        try {
+            const { id } = req.params;
+            const [category] = await CategoryService.getCategoryById(id);
+
+            if (category.length === 0) {
+                return res.status(404).json({ message: "Category not found" });
+            }
+
+            res.json(category[0]);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }
+
     static async createCategory(req, res) {
         try {
             const { name } = req.body;
